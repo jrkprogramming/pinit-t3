@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-const source = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_API}`;
+const source = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_API}&libraries=places`;
 
 export default function Document() {
   return (
