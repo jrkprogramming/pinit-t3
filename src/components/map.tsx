@@ -12,25 +12,15 @@ import {
 import Link from "next/link";
 import style from "./map";
 
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
 const mapContainerStyle = {
   width: "100vw",
   height: "80vh",
 };
-
-// const [userCenter, setUserCenter] = useState({ lat: null, lng: null });
-
-// useEffect(() => {
-//   const lat = window.sessionStorage.getItem("lat");
-//   const lng = window.sessionStorage.getItem("lng");
-
-//   const parsedLat = lat ? parseFloat(lat) : null;
-//   const parsedLng = lng ? parseFloat(lng) : null;
-
-//   setUserCenter({
-//     lat: parsedLat,
-//     lng: parsedLng,
-//   });
-// }, []);
 
 const center = {
   lat: 36,
@@ -60,7 +50,7 @@ const Map = (
     lng: "",
   });
 
-  const [allPins, setAllPins] = useState([{}]);
+  // const [allPins, setAllPins] = useState([{}]);
 
   const [pinInfo, setPinInfo] = useState({
     _id: "",
@@ -89,20 +79,54 @@ const Map = (
   //   );
   // });
 
+  // const [userCenter, setUserCenter] = useState<{
+  //   lat: number | null;
+  //   lng: number | null;
+  // }>({
+  //   lat: null,
+  //   lng: null,
+  // });
+
+  // useEffect(() => {
+  //   const lat: string | null = sessionStorage.getItem("lat");
+  //   const lng: string | null = sessionStorage.getItem("lng");
+
+  //   const parsedLat: number | null = lat ? parseFloat(lat) : null;
+  //   const parsedLng: number | null = lng ? parseFloat(lng) : null;
+
+  //   setUserCenter((prevState) => ({
+  //     ...prevState,
+  //     lat: parsedLat,
+  //     lng: parsedLng,
+  //   }));
+  // }, []);
+
+  // const userCenterLatLng: google.maps.LatLngLiteral | undefined =
+  //   userCenter.lat && userCenter.lng
+  //     ? { lat: userCenter.lat, lng: userCenter.lng }
+  //     : undefined;
+
+  // const infoWindowPosition: google.maps.LatLngLiteral | undefined =
+  //   latLng.lat !== null && latLng.lng !== null
+  //     ? { lat: parseFloat(latLng.lat), lng: parseFloat(latLng.lng) }
+  //     : undefined;
+
   return (
     <LoadScript
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
     >
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
-        center={{ lat: 44, lng: 44 }}
-        // onClick={(e) => {
-        //   setLatLng({
-        //     lat: e.latLng.lat(),
-        //     lng: e.latLng.lng(),
-        //   });
-        // }}
+        zoom={4}
+        center={center}
+        onClick={(e) => {
+          if (e.latLng) {
+            setLatLng({
+              lat: e.latLng.lat().toString(),
+              lng: e.latLng.lng().toString(),
+            });
+          }
+        }}
         options={{
           mapTypeId: "terrain",
           styles: [
@@ -213,36 +237,36 @@ const Map = (
         );
       })} */}
 
-        {/* {latLng.lat && (
-        <InfoWindow
-          position={{
-            lat: latLng.lat,
-            lng: latLng.lng,
-          }}
-          onCloseClick={() => {
-            setLatLng({
-              lat: null,
-              lng: null,
-            });
-          }}
-        >
-          {latLng.lat === infoLatLng.lat && latLng.lng === infoLatLng.lng ? (
-            <div>
-              <div>{pinInfo.name}</div>
-              <div>{pinInfo.address}</div>
-              <div>Created By: {pinInfo.Owner?.username}</div>
-              <br></br>
-              <Link to={`/pins/${pinInfo._id}`}>View More</Link>
-            </div>
-          ) : (
-            <div className="placement">
+        {latLng.lat && (
+          <InfoWindow
+            position={{
+              lat: parseFloat(latLng.lat),
+              lng: parseFloat(latLng.lng),
+            }}
+            onCloseClick={() => {
+              setLatLng({
+                lat: "",
+                lng: "",
+              });
+            }}
+          >
+            {latLng.lat === infoLatLng.lat && latLng.lng === infoLatLng.lng ? (
               <div>
-                <Link to="/newPin">ADD A PIN</Link>
+                <div>{pinInfo.name}</div>
+                <div>{pinInfo.address}</div>
+                {/* <div>Created By: {pinInfo.Owner?.username}</div> */}
+                <br></br>
+                <Link href={`/pins/${pinInfo._id}`}>View More</Link>
               </div>
-            </div>
-          )}
-        </InfoWindow>
-      )} */}
+            ) : (
+              <div className="placement">
+                <div>
+                  <Link href="/newPin">ADD A PIN</Link>
+                </div>
+              </div>
+            )}
+          </InfoWindow>
+        )}
       </GoogleMap>
     </LoadScript>
   );
