@@ -9,7 +9,10 @@ export const Navbar = () => {
     <nav className={style.navbar}>
       <div className={style.navContainer}>
         <ul className={style.navMenu}>
-          <Link href="/" className={style.navbarLogo}>
+          <Link
+            href={sessionData?.user ? "/home" : "/"}
+            className={style.navbarLogo}
+          >
             PINIT
             {/* <FaMapPin className="pinIcon" /> */}
           </Link>
@@ -51,7 +54,7 @@ export const Navbar = () => {
             </>
           )}
           <li className={style.navItem}>
-            <Link href="/newpin" className={style.link}>
+            <Link href="/createPin" className={style.link}>
               CREATE PIN
             </Link>
           </li>

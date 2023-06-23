@@ -1,0 +1,310 @@
+.pins {
+  display: flex;
+  /* border: red solid 1px; */
+  flex-flow: column;
+  min-width: 50vw;
+}
+
+.form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: solid black 1px;
+  /* box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.4); */
+  box-shadow: 10px 10px 10px #deb89b;
+  width: 50vw;
+}
+
+form #ac {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+form div .ac {
+  /* border: red solid 1px; */
+  /* text-align: center; */
+  margin: 0 10px;
+  padding: 0;
+}
+
+form div .ac svg {
+  /* border: red solid 1px; */
+  /* text-align: center; */
+  padding-top: 5px;
+  font-size: 1.2rem;
+}
+form div .ac input {
+  /* border: red solid 1px; */
+  /* text-align: center; */
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.form div {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+
+  /* width: 200px; */
+}
+
+.formDiv label {
+  font-size: 1.5rem;
+  width: 70%;
+}
+
+.formDiv input {
+  margin: 0 0 0 20px;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 2px 2px 2px #deb89b;
+}
+
+form div #description {
+  height: 100px;
+  width: 200px;
+  margin: 0 0 0 20px;
+  border-radius: 10px;
+  /* width: 200px; */
+  box-shadow: 2px 2px 2px #deb89b;
+  overflow-y: visible;
+  resize: none;
+}
+
+form .button {
+  width: 50%;
+  text-align: center;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #deb89b;
+  width: 100%;
+  /* background-color: #deb89b; */
+}
+
+form .button:hover {
+  background-color: rgb(209, 203, 203);
+  cursor: pointer;
+}
+
+form .button:active {
+  background-color: #e7dcdc;
+  cursor: pointer;
+}
+
+/* New Pin */
+#pform {
+  /* border: red 1px solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#pinputs {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+}
+
+.pdiv {
+  justify-content: space-between;
+}
+
+/* Login */
+.lform {
+  margin-top: 70px;
+  align-items: center;
+}
+
+form .register h4 a em {
+  text-decoration: none;
+}
+
+.button.lbutton {
+  margin-top: 20px;
+  width: 20%;
+}
+
+.here {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.here a {
+  text-decoration: none;
+  color: #c98a59;
+}
+
+.button.pbutton {
+  width: 25%;
+  margin-top: 20px;
+}
+
+/* Signup */
+.sform header #sbuttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 0 0;
+}
+
+#sbuttons {
+  width: 20%;
+}
+
+.button.sbutton {
+  width: 100%;
+}
+
+#cancel {
+  /* margin-right: -20px; */
+  width: 100%;
+}
+
+#cancel .button {
+  width: 100%;
+}
+
+.sdiv {
+}
+
+.sform {
+  margin-top: 70px;
+  align-items: center;
+}
+.sform div input {
+  height: 20px;
+  margin: 0 0 0 20px;
+}
+
+/* Edit */
+.button.ebutton {
+  width: 25%;
+  margin-top: 20px;
+}
+
+#eform {
+  /* border: red 1px solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#einputs {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+}
+
+.ediv {
+  justify-content: space-between;
+}
+
+.dropzone {
+  height: 8rem;
+  margin: 1rem;
+  padding: 1rem;
+  border: 2px dashed salmon;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 80%;
+}
+
+.active {
+  border: 2px solid rebeccapurple;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1080px) {
+  #sbuttons {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1079px) {
+  #sbuttons {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #sbuttons {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .lform div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lform div input {
+    margin-left: 0;
+  }
+
+  #pform {
+    width: 100vw;
+    padding: 0;
+  }
+
+  #pinputs {
+    width: 90%;
+    /* border: red 1px solid; */
+  }
+
+  #pform .pdiv {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #pform .pdiv input {
+    margin-left: 0;
+    width: 50%;
+  }
+  #pform .pdiv label {
+    text-align: center;
+  }
+
+  .button.pbutton {
+    margin-bottom: 20px;
+  }
+
+  #eform {
+    width: 100vw;
+    padding: 0;
+  }
+
+  #einputs {
+    width: 90%;
+    /* border: red 1px solid; */
+  }
+
+  #eform .ediv {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #eform .ediv input {
+    margin-left: 0;
+    width: 50%;
+  }
+  #eform .ediv label {
+    text-align: center;
+  }
+  .button.ebutton {
+    margin-bottom: 20px;
+  }
+
+  .sform div input {
+    margin: 0;
+  }
+}

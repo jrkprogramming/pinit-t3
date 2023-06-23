@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { Navbar } from "~/components/navbar";
 import { useRouter } from "next/router";
+import { LatLngProvider } from "../contexts/latLng";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,10 +13,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   const router = useRouter();
   const showHeader = router.pathname === "/" ? false : true;
+
   return (
     <SessionProvider session={session}>
       {showHeader && <Navbar />}
-      <Component {...pageProps} />
+      <LatLngProvider>
+        <Component {...pageProps} />
+      </LatLngProvider>
     </SessionProvider>
   );
 };

@@ -112,107 +112,107 @@ const Map = (
   //     : undefined;
 
   return (
-    <LoadScript
-      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
+    // <LoadScript
+    //   googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
+    // >
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={4}
+      center={center}
+      onClick={(e) => {
+        if (e.latLng) {
+          setLatLng({
+            lat: e.latLng.lat().toString(),
+            lng: e.latLng.lng().toString(),
+          });
+        }
+      }}
+      options={{
+        mapTypeId: "terrain",
+        styles: [
+          {
+            elementType: "labels",
+            featureType: "poi",
+            stylers: [{ visibility: "off" }],
+          },
+          { elementType: "geometry", stylers: [{ color: "#3b3c3d" }] },
+          {
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#242f3e" }],
+          },
+          {
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#746855" }],
+          },
+          {
+            featureType: "administrative.locality",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#b8845d" }],
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [{ color: "#263e41" }],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [{ color: "#38414e" }],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#212a37" }],
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#9ca5b3" }],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry",
+            stylers: [{ color: "#746855" }],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#1f2835" }],
+          },
+          {
+            featureType: "road.highway",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#f3d19c" }],
+          },
+          {
+            featureType: "transit",
+            elementType: "geometry",
+            stylers: [{ color: "#2f3948" }],
+          },
+          {
+            featureType: "transit.station",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }],
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [{ color: "#182230" }],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#515c6d" }],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#111d2f" }],
+          },
+        ],
+      }}
     >
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={4}
-        center={center}
-        onClick={(e) => {
-          if (e.latLng) {
-            setLatLng({
-              lat: e.latLng.lat().toString(),
-              lng: e.latLng.lng().toString(),
-            });
-          }
-        }}
-        options={{
-          mapTypeId: "terrain",
-          styles: [
-            {
-              elementType: "labels",
-              featureType: "poi",
-              stylers: [{ visibility: "off" }],
-            },
-            { elementType: "geometry", stylers: [{ color: "#3b3c3d" }] },
-            {
-              elementType: "labels.text.stroke",
-              stylers: [{ color: "#242f3e" }],
-            },
-            {
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#746855" }],
-            },
-            {
-              featureType: "administrative.locality",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#b8845d" }],
-            },
-            {
-              featureType: "poi.park",
-              elementType: "geometry",
-              stylers: [{ color: "#263e41" }],
-            },
-            {
-              featureType: "road",
-              elementType: "geometry",
-              stylers: [{ color: "#38414e" }],
-            },
-            {
-              featureType: "road",
-              elementType: "geometry.stroke",
-              stylers: [{ color: "#212a37" }],
-            },
-            {
-              featureType: "road",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#9ca5b3" }],
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry",
-              stylers: [{ color: "#746855" }],
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry.stroke",
-              stylers: [{ color: "#1f2835" }],
-            },
-            {
-              featureType: "road.highway",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#f3d19c" }],
-            },
-            {
-              featureType: "transit",
-              elementType: "geometry",
-              stylers: [{ color: "#2f3948" }],
-            },
-            {
-              featureType: "transit.station",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#d59563" }],
-            },
-            {
-              featureType: "water",
-              elementType: "geometry",
-              stylers: [{ color: "#182230" }],
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#515c6d" }],
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.stroke",
-              stylers: [{ color: "#111d2f" }],
-            },
-          ],
-        }}
-      >
-        {/* {searchedPins.map((location, i) => {
+      {/* {searchedPins.map((location, i) => {
         return (
           <Marker
             key={i}
@@ -237,38 +237,38 @@ const Map = (
         );
       })} */}
 
-        {latLng.lat && (
-          <InfoWindow
-            position={{
-              lat: parseFloat(latLng.lat),
-              lng: parseFloat(latLng.lng),
-            }}
-            onCloseClick={() => {
-              setLatLng({
-                lat: "",
-                lng: "",
-              });
-            }}
-          >
-            {latLng.lat === infoLatLng.lat && latLng.lng === infoLatLng.lng ? (
+      {latLng.lat && (
+        <InfoWindow
+          position={{
+            lat: parseFloat(latLng.lat),
+            lng: parseFloat(latLng.lng),
+          }}
+          onCloseClick={() => {
+            setLatLng({
+              lat: "",
+              lng: "",
+            });
+          }}
+        >
+          {latLng.lat === infoLatLng.lat && latLng.lng === infoLatLng.lng ? (
+            <div>
+              <div>{pinInfo.name}</div>
+              <div>{pinInfo.address}</div>
+              {/* <div>Created By: {pinInfo.Owner?.username}</div> */}
+              <br></br>
+              <Link href={`/pins/${pinInfo._id}`}>View More</Link>
+            </div>
+          ) : (
+            <div className="placement">
               <div>
-                <div>{pinInfo.name}</div>
-                <div>{pinInfo.address}</div>
-                {/* <div>Created By: {pinInfo.Owner?.username}</div> */}
-                <br></br>
-                <Link href={`/pins/${pinInfo._id}`}>View More</Link>
+                <Link href="/createPin">ADD A PIN</Link>
               </div>
-            ) : (
-              <div className="placement">
-                <div>
-                  <Link href="/newPin">ADD A PIN</Link>
-                </div>
-              </div>
-            )}
-          </InfoWindow>
-        )}
-      </GoogleMap>
-    </LoadScript>
+            </div>
+          )}
+        </InfoWindow>
+      )}
+    </GoogleMap>
+    // </LoadScript>
   );
 };
 

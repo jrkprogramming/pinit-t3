@@ -1,19 +1,20 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
-// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-const source = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_API}&libraries=places`;
-
-export default function Document() {
-  return (
-    <Html>
-      <Head>
-        <Script type="text/javascript" src={source} />
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+export default class MyDocument extends Document {
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+          <Script
+            strategy="beforeInteractive"
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
+          />
+        </body>
+      </Html>
+    );
+  }
 }
