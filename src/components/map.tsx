@@ -76,7 +76,7 @@ const Map = (
 
   // if (loadError) return "Error loading maps";
   // if (!isLoaded) return "Loading maps";
-  if (!latLng) return "Loading";
+  // if (!latLng) return "Loading";
 
   // prisma findAll
   // const searchedPins = allPins?.filter(function (el) {

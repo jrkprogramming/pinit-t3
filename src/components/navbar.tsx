@@ -3,7 +3,7 @@ import Link from "next/link";
 import style from "./Navbar.module.css";
 // import { FaMapPin } from "react-icons/fa";
 
-export const Navbar = ({ navBarSwitch }) => {
+export const Navbar = () => {
   const { data: sessionData } = useSession();
   return (
     <nav className={style.navbar}>
@@ -32,32 +32,25 @@ export const Navbar = ({ navBarSwitch }) => {
             </div>
           </li>
 
-          <li className="nav-item">
-            {sessionData?.user?.name ? (
-              navBarSwitch === 1 ? (
+          {sessionData?.user?.name && (
+            <>
+              {/* <li className={style.navItem}>
                 <div>
-                  <Link
-                    href="/"
-                    className={style.link}
-                    // onClick={() => setNavBarSwitch(2)}
-                  >
+                  <Link href="/" className={style.link}>
                     MY PINS
                   </Link>
                 </div>
-              ) : (
+              </li> */}
+              <li className={style.navItem}>
                 <div>
-                  <Link
-                    href={`/home`}
-                    className={style.link}
-                    // onClick={() => setNavBarSwitch(1)}
-                  >
+                  <Link href="/home" className={style.link}>
                     ALL PINS
                   </Link>
                 </div>
-              )
-            ) : null}
-          </li>
-          <li className="navItem">
+              </li>
+            </>
+          )}
+          <li className={style.navItem}>
             <Link href="/newpin" className={style.link}>
               CREATE PIN
             </Link>

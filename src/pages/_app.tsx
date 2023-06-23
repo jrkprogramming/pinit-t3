@@ -14,7 +14,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const showHeader = router.pathname === "/" ? false : true;
   return (
     <SessionProvider session={session}>
-      {showHeader && <Navbar navBarSwitch={1} />}
+      {showHeader && <Navbar />}
       <Component {...pageProps} />
     </SessionProvider>
   );
