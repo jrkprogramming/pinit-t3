@@ -55,6 +55,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Pin           Pin[]
 }
 
 model VerificationToken {
@@ -63,4 +64,31 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Pin {
+    id          String    @id @default(cuid())
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    user        User      @relation(fields: [userId], references: [id])
+    userId      String
+    name        String
+    address     String
+    city        String
+    lng         Int
+    lat         Int
+    description String
+    // image       String
+    // image_id    String
+    comments    Comment[]
+}
+
+model Comment {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title     String
+    content   String   @db.Text
+    pin       Pin      @relation(fields: [pinId], references: [id], onDelete: Cascade)
+    pinId     String
 }
