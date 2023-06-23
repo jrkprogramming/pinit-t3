@@ -1,0 +1,11 @@
+.placement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.placement div a {
+  list-style: none;
+  text-decoration: none;
+  color: red;
+}

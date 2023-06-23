@@ -16,15 +16,20 @@
 
 .navbarContainer {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   height: 70px;
-  max-width: 100%;
+  /* max-width: 100%; */
   /* margin-top: 20px;
   margin-bottom: 15px; */
   padding: 0.25rem;
   background: transparent;
   overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+
+  justify-content: space-between;
+  padding: 16px;
 }
 
 .navbarLogo {
@@ -52,9 +57,10 @@
   grid-gap: 5px;
   list-style: none;
   text-align: center;
-  width: 60vw;
-  justify-content: end;
-  margin-right: 1rem;
+  width: 100%;
+  justify-content: center;
+  /* margin-right: 1rem;
+  margin-left: 1rem; */
 }
 
 .navItem {
@@ -87,7 +93,7 @@
   text-transform: uppercase;
 }
 
-@media screen and (max-width: 637px) {
+@media screen and (max-width: 50%) {
   .link,
   .welcome {
     font-size: 0.5rem;
