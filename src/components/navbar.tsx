@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import style from "./Navbar.module.css";
+import style from "./navbar.module.css";
 // import { FaMapPin } from "react-icons/fa";
 
 export const Navbar = () => {
