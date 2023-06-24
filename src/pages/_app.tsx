@@ -6,11 +6,16 @@ import "~/styles/globals.css";
 import { Navbar } from "~/components/navbar";
 import { useRouter } from "next/router";
 import { LatLngProvider } from "../contexts/latLng";
+import { useState } from "react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  const [pinlatLngContextState, setPinLatLngContextState] = useState({
+    lat: 0,
+    lng: 0,
+  });
   const router = useRouter();
   const showHeader = router.pathname === "/" ? false : true;
 

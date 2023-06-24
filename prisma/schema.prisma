@@ -75,8 +75,8 @@ model Pin {
     name        String
     address     String
     city        String
-    lng         Int
-    lat         Int
+    lng         Float
+    lat         Float
     description String
     // image       String
     // image_id    String

@@ -9,6 +9,7 @@ import Link from "next/link";
 import latLng from "../../contexts/latLng";
 import { LoadScript } from "@react-google-maps/api";
 import style from "./createPin.module.css";
+import { useRouter } from "next/router";
 
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -16,6 +17,7 @@ import style from "./createPin.module.css";
 // import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function CreatePinPage() {
+  const router = useRouter();
   const latLngContext = useContext(LatLngContext);
   const [formData, setFormData] = useState({
     name: "",
@@ -28,8 +30,8 @@ export default function CreatePinPage() {
 
   const createPin = api.pin.create.useMutation({
     onSuccess: () => {
-      // void refetchRecipes();
-      <Link href="/home"></Link>;
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      router.push("/home");
       console.log("created pin");
     },
   });

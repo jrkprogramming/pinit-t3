@@ -3,9 +3,10 @@ import { createContext, useState, type ReactNode } from "react";
 interface LatLngValue {
   data: { lat: number; lng: number };
   setData: (value: { lat: number; lng: number }) => void;
+  // setClickedLatLng: (value: { lat: number; lng: number }) => void;
 }
 
-const LatLng = createContext<LatLngValue | undefined>(undefined);
+const LatLngContext = createContext<LatLngValue | undefined>(undefined);
 
 interface LatLngProviderProps {
   children: ReactNode;
@@ -17,13 +18,18 @@ export function LatLngProvider({ children }: LatLngProviderProps) {
     lng: 0,
   });
 
-  const updateLatLng = (lat: number, lng: number) => {
-    setData({ lat, lng });
+  const setClickedLatLng = (value: { lat: number; lng: number }) => {
+    // Implement the logic for setting the clicked LatLng
+    // For example:
+    // setData(value);
+    // Perform any other necessary actions
   };
 
   return (
-    <LatLng.Provider value={{ data, setData: updateLatLng }}>
+    <LatLngContext.Provider value={{ data, setData }}>
       {children}
-    </LatLng.Provider>
+    </LatLngContext.Provider>
   );
 }
+
+export default LatLngContext;

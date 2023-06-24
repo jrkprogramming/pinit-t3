@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import {
   // Googleap,
@@ -11,6 +11,10 @@ import {
 } from "@react-google-maps/api";
 import Link from "next/link";
 import style from "./map";
+import LatLngContext from "../contexts/latLng";
+import { api, type RouterOutputs } from "~/utils/api";
+
+type Pin = RouterOutputs["pin"]["getAll"][0];
 
 interface Coordinates {
   lat: number;
@@ -41,13 +45,14 @@ const Map = (
     // searchBar,
   }
 ) => {
-  const [latLng, setLatLng] = useState({
-    lat: "",
-    lng: "",
+  const [latLng, setLatLng] = useState<Coordinates>({
+    lat: 0,
+    lng: 0,
   });
-  const [infoLatLng, setInfoLatLng] = useState({
-    lat: "",
-    lng: "",
+
+  const [infoLatLng, setInfoLatLng] = useState<Coordinates>({
+    lat: 0,
+    lng: 0,
   });
 
   // const [allPins, setAllPins] = useState([{}]);
@@ -60,13 +65,6 @@ const Map = (
     lat: null,
     lng: null,
   });
-  // const { isLoaded, loadError } = useLoadScript({
-  //   googleMapsApiKey: process.env.GOOGLE_MAP_API,
-  // });
-
-  // if (loadError) return "Error loading maps";
-  // if (!isLoaded) return "Loading maps";
-  // if (!latLng) return "Loading";
 
   // prisma findAll
   // const searchedPins = allPins?.filter(function (el) {
@@ -110,6 +108,21 @@ const Map = (
   //   latLng.lat !== null && latLng.lng !== null
   //     ? { lat: parseFloat(latLng.lat), lng: parseFloat(latLng.lng) }
   //     : undefined;
+  const { data, setData } = useContext(LatLngContext);
+  const [clickedLatLng, setClickedLatLng] = useState<Coordinates | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  // const { data: sessionData } = useSession();
+  const { data: pins, refetch: refetchPins } = api.pin.getAll.useQuery(
+    undefined, // no input
+    {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      // enabled: sessionData?.user !== undefined,
+      onSuccess: (data) => {
+        // setSelectedRecipe(selectedRecipe ?? data[0] ?? null);
+        console.log("recipes rendered!");
+      },
+    }
+  );
 
   return (
     // <LoadScript
@@ -121,10 +134,13 @@ const Map = (
       center={center}
       onClick={(e) => {
         if (e.latLng) {
-          setLatLng({
-            lat: e.latLng.lat().toString(),
-            lng: e.latLng.lng().toString(),
-          });
+          const clickedLatLng: Coordinates = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+          };
+          setLatLng(clickedLatLng);
+          setClickedLatLng(clickedLatLng);
+          setData(clickedLatLng);
         }
       }}
       options={{
@@ -212,7 +228,7 @@ const Map = (
         ],
       }}
     >
-      {/* {searchedPins.map((location, i) => {
+      {pins?.map((location, i) => {
         return (
           <Marker
             key={i}
@@ -235,7 +251,7 @@ const Map = (
             // label={`${i}`}
           ></Marker>
         );
-      })} */}
+      })}
 
       {latLng.lat && (
         <InfoWindow
