@@ -4,6 +4,7 @@ import Link from "next/link";
 import style from "./[id].module.css";
 import { useRouter } from "next/router";
 import { api, type RouterOutputs } from "~/utils/api";
+import Modal from "../../../components/editPinModal";
 
 export default function PinDetailsPage() {
   const router = useRouter();
@@ -20,6 +21,22 @@ export default function PinDetailsPage() {
       console.log("go back to map page.... gotta add functionality");
     },
   });
+
+  const latValue = Array.isArray(lat) ? lat[0] : lat;
+  const lngValue = Array.isArray(lng) ? lng[0] : lng;
+  const latNumber =
+    typeof latValue === "string" ? parseFloat(latValue) : latValue;
+  const lngNumber =
+    typeof lngValue === "string" ? parseFloat(lngValue) : lngValue;
+
+  const idValue = Array.isArray(id) ? id[0] : id;
+  const nameValue = Array.isArray(name) ? name[0] : name;
+  const addressValue = Array.isArray(address) ? address[0] : address;
+  const cityValue = Array.isArray(city) ? city[0] : city;
+  const descriptionValue = Array.isArray(description)
+    ? description[0]
+    : description;
+
   return (
     <div className={style.bodyContainer}>
       <section className={style.sectionContainer}>
@@ -54,7 +71,16 @@ export default function PinDetailsPage() {
           <div className={style.BtnContainer}>
             {/* {user && pinInfo?.user === user._id ? ( */}
             <div id="btn">
-              <Link href={`/pins/edit/${id}`}>Edit Pin</Link>
+              {/* <Link href={`/pins/edit/${id}`}>Edit Pin</Link> */}
+              <Modal
+                id={idValue}
+                name={nameValue}
+                address={addressValue}
+                city={cityValue}
+                description={descriptionValue}
+                lat={latNumber}
+                lng={lngNumber}
+              ></Modal>
               <button className={style.btn} onClick={() => handleDeletePin(id)}>
                 DELETE
               </button>
