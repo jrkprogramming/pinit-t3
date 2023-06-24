@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import style from "./navbar.module.css";
 // import { FaMapPin } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 export const Navbar = () => {
   const { data: sessionData } = useSession();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await router.push("/");
+    void signOut();
+  };
+
   return (
     <nav className={style.navbar}>
       <div className={style.navContainer}>
@@ -56,7 +65,7 @@ export const Navbar = () => {
                   CREATE PIN
                 </Link>
               </li>
-              <button className={style.link} onClick={() => void signOut()}>
+              <button className={style.link} onClick={handleSignOut}>
                 SIGN OUT
               </button>
             </>

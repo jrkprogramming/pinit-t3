@@ -145,7 +145,7 @@ export default function CreatePinPage() {
 
         <div id={style.pinputs}>
           <div className={`${style.pdiv ?? ""} ${style.formDiv ?? ""}`}>
-            <label htmlFor="name">Name of location</label>
+            <label htmlFor="name">Name of Location</label>
             <input
               type="text"
               name="name"
