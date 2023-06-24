@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useState, useEffect, useContext } from "react";
 import { Marker, InfoWindow, GoogleMap } from "@react-google-maps/api";
@@ -7,10 +8,11 @@ import LatLngContext from "../contexts/latLng";
 import { api, type RouterOutputs } from "~/utils/api";
 
 type PinInfo = {
-  _id: string;
+  id: string;
   name: string;
   address: string;
   city: string;
+  description: string;
   lat: null | number;
   lng: null | number;
 };
@@ -228,6 +230,7 @@ const Map = () => {
             lng: parseFloat(latLng.lng.toString()),
           }}
           onCloseClick={() => {
+            console.log(pinInfo);
             setLatLng({
               lat: 0,
               lng: 0,
@@ -240,12 +243,26 @@ const Map = () => {
               <div>{pinInfo.address}</div>
               {/* <div>Created By: {pinInfo.}</div> */}
               <br></br>
-              {/* <Link href={`/pins/${pinInfo._id}`}>View More</Link> */}
+              <Link
+                href={{
+                  pathname: `/pinDetails/${pinInfo?.id}`,
+                  query: {
+                    name: pinInfo.name,
+                    address: pinInfo.address,
+                    city: pinInfo.city,
+                    lat: pinInfo.lat,
+                    lng: pinInfo.lng,
+                    description: pinInfo.description,
+                  },
+                }}
+              >
+                View More
+              </Link>
             </div>
           ) : (
             <div className="placement">
               <div>
-                <Link href="/createPin">ADD A PIN</Link>
+                <Link href={"/createPin}"}>ADD A PIN</Link>
               </div>
             </div>
           )}
