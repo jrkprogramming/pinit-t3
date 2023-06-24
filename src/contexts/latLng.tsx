@@ -3,9 +3,7 @@ import { createContext, useState, type ReactNode } from "react";
 interface LatLngValue {
   data: { lat: number; lng: number };
   setData: (value: { lat: number; lng: number }) => void;
-  // setClickedLatLng: (value: { lat: number; lng: number }) => void;
 }
-
 const LatLngContext = createContext<LatLngValue | undefined>(undefined);
 
 interface LatLngProviderProps {

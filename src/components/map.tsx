@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import {
@@ -12,8 +13,6 @@ import Link from "next/link";
 import style from "./map";
 import LatLngContext from "../contexts/latLng";
 import { api, type RouterOutputs } from "~/utils/api";
-
-type Pin = RouterOutputs["pin"]["getAll"][0];
 
 interface Coordinates {
   lat: number;
@@ -107,16 +106,16 @@ const Map = (
   //   latLng.lat !== null && latLng.lng !== null
   //     ? { lat: parseFloat(latLng.lat), lng: parseFloat(latLng.lng) }
   //     : undefined;
-  const { data, setData } = useContext(LatLngContext);
+  const { setData } = useContext(LatLngContext);
   const [clickedLatLng, setClickedLatLng] = useState<Coordinates | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   // const { data: sessionData } = useSession();
-  const { data: pins, refetch: refetchPins } = api.pin.getAll.useQuery(
+  const { data: pins } = api.pin.getAll.useQuery(
     undefined, // no input
     {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       // enabled: sessionData?.user !== undefined,
-      onSuccess: (data) => {
+      onSuccess: () => {
         // setSelectedRecipe(selectedRecipe ?? data[0] ?? null);
         console.log("recipes rendered!");
       },
@@ -236,18 +235,18 @@ const Map = (
               lng: location.lng,
             }}
             onClick={(e) => {
-              console.log(e);
-              setLatLng({
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-              });
-              setInfoLatLng({
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-              });
-              setPinInfo(location);
+              if (e.latLng) {
+                setLatLng({
+                  lat: e.latLng.lat(),
+                  lng: e.latLng.lng(),
+                });
+                setInfoLatLng({
+                  lat: e.latLng.lat(),
+                  lng: e.latLng.lng(),
+                });
+                // setPinInfo(location);
+              }
             }}
-            // label={`${i}`}
           ></Marker>
         );
       })}
