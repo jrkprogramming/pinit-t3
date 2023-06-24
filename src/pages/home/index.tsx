@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <div className={style.outerContainer}>
       <div className={style.map}>
-        <Map></Map>;
+        <Map></Map>
       </div>
     </div>
   );
