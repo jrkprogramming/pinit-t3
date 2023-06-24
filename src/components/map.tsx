@@ -15,6 +15,7 @@ type PinInfo = {
   description: string;
   lat: null | number;
   lng: null | number;
+  user: any;
 };
 
 interface Coordinates {
@@ -241,12 +242,13 @@ const Map = () => {
             <div>
               <div>{pinInfo.name}</div>
               <div>{pinInfo.address}</div>
-              {/* <div>Created By: {pinInfo.}</div> */}
+              <div>Created By: {pinInfo.user}</div>
               <br></br>
               <Link
                 href={{
                   pathname: `/pinDetails/${pinInfo?.id}`,
                   query: {
+                    id: pinInfo.id,
                     name: pinInfo.name,
                     address: pinInfo.address,
                     city: pinInfo.city,
@@ -262,7 +264,7 @@ const Map = () => {
           ) : (
             <div className="placement">
               <div>
-                <Link href={"/createPin}"}>ADD A PIN</Link>
+                <Link href={"/createPin"}>ADD A PIN</Link>
               </div>
             </div>
           )}

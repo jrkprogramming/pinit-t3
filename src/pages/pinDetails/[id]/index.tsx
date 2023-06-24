@@ -1,10 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import Link from "next/link";
 import style from "./[id].module.css";
 import { useRouter } from "next/router";
+import { api, type RouterOutputs } from "~/utils/api";
 
 export default function PinDetailsPage() {
   const router = useRouter();
-  const { name, address, city, description, lat, lng } = router.query;
+  const { id, name, address, city, description, lat, lng } = router.query;
+
+  function handleDeletePin(id: string | string[] | undefined) {
+    if (typeof id === "string") {
+      void deletePin.mutate({ id: id });
+    }
+  }
+
+  const deletePin = api.pin.delete.useMutation({
+    onSuccess: () => {
+      console.log("go back to map page.... gotta add functionality");
+    },
+  });
   return (
     <div className={style.bodyContainer}>
       <section className={style.sectionContainer}>
@@ -13,13 +28,13 @@ export default function PinDetailsPage() {
           <div className={style.infoContainer}>
             <h2>
               {/* <FaCity className="icon" /> */}
-              <br></br> {city}city
+              <br></br> {city}
             </h2>
             <br></br>
 
             <h2>
               {/* <FaMapMarkedAlt className="icon" />  */}
-              <br></br> {address}address
+              <br></br> {address}
             </h2>
             <br></br>
             {/* <div className="imgContainer">
@@ -33,19 +48,19 @@ export default function PinDetailsPage() {
         </div>
 
         <div className={style.right}>
-          <h1>{name}name</h1>
-          <p>{description}descrip</p>
-          {/* <p>Pin Created By: {pinInfo.Owner?.username}</p>
-          <div className="BtnContainer">
-            {user && pinInfo.Owner?._id === user._id ? (
-              <div id="btn">
-                <Link to={`/pins/edit/${pinInfo._id}`}>Edit Pin</Link>
-                <button className="btn" onClick={() => deletePin(pinInfo._id)}>
-                  DELETE
-                </button>
-              </div>
-            ) : null}
-          </div> */}
+          <h1>{name}</h1>
+          <p>{description}</p>
+          {/* <p>Pin Created By: {pinInfo.Owner?.username}</p> */}
+          <div className={style.BtnContainer}>
+            {/* {user && pinInfo?.user === user._id ? ( */}
+            <div id="btn">
+              <Link href={`/pins/edit/${id}`}>Edit Pin</Link>
+              <button className={style.btn} onClick={() => handleDeletePin(id)}>
+                DELETE
+              </button>
+            </div>
+            {/* ) : null} */}
+          </div>
         </div>
         {/* </div> */}
       </section>
