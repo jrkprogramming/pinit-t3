@@ -25,31 +25,6 @@ export default function PinDetailsPage() {
     },
   });
 
-  useEffect(() => {
-    // Update the page when name, city, address, or description changes
-    console.log(
-      "Name, city, address, or description updated:",
-      name,
-      city,
-      address,
-      description
-    );
-
-    // Perform any necessary actions or re-fetch data
-  }, [name, city, address, description]);
-
-  // const { data: pins } = api.pin.getPinDetails.useQuery(
-  //   undefined, // no input
-  //   {
-  //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  //     // enabled: sessionData?.user !== undefined,
-  //     onSuccess: () => {
-  //       // setSelectedRecipe(selectedRecipe ?? data[0] ?? null);
-  //       console.log("single pin rendered!");
-  //     },
-  //   }
-  // );
-
   const latValue = Array.isArray(lat) ? lat[0] : lat;
   const lngValue = Array.isArray(lng) ? lng[0] : lng;
   const latNumber =

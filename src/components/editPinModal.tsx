@@ -38,9 +38,8 @@ export default function Modal({
 
   const editPin = api.pin.edit.useMutation({
     onSuccess: async () => {
-      window.location.reload();
       await router.push(`/home`);
-      await router.push(`/pinDetails/${id}`);
+      window.location.reload();
     },
   });
 
@@ -69,6 +68,17 @@ export default function Modal({
       lat: Number(formData.lat),
     });
   };
+
+  useEffect(() => {
+    const handleMutationSuccess = async () => {
+      if (editPin.isSuccess) {
+        window.location.reload();
+        await router.push(`/pinDetails/${id}`);
+      }
+    };
+
+    void handleMutationSuccess();
+  }, [editPin.isSuccess, id, router]);
   return (
     <>
       <button
