@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { z } from "zod";
 import {
 	createTRPCRouter,
@@ -5,11 +7,24 @@ import {
 	protectedProcedure,
 } from "~/server/api/trpc";
 
+
 export const pinRouter = createTRPCRouter({
 
-	getAll: protectedProcedure.query(({ ctx }) => {
+
+	getAllPins: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.pin.findMany();
 	}),
+
+	getPinDetails: protectedProcedure.query(({ ctx, input }) => {
+		return ctx.prisma.pin.findUnique({
+			where: {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				//@ts-ignore
+				id: input?.id || "", // Use optional chaining to access the input's id safely
+			},
+		});
+	}),
+
 
 	delete: protectedProcedure
 		.input(z.object({ id: z.string() }))

@@ -83,7 +83,7 @@ const Map = () => {
   const [clickedLatLng, setClickedLatLng] = useState<Coordinates | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   // const { data: sessionData } = useSession();
-  const { data: pins } = api.pin.getAll.useQuery(
+  const { data: pins } = api.pin.getAllPins.useQuery(
     undefined, // no input
     {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -91,6 +91,7 @@ const Map = () => {
       onSuccess: () => {
         // setSelectedRecipe(selectedRecipe ?? data[0] ?? null);
         console.log("recipes rendered!");
+        console.log(pins);
       },
     }
   );
@@ -260,6 +261,11 @@ const Map = () => {
               >
                 View More
               </Link>
+              {/* <Link
+                href={`/pinDetails/${pinInfo?.id}`}
+              >
+                View More
+              </Link> */}
             </div>
           ) : (
             <div className="placement">

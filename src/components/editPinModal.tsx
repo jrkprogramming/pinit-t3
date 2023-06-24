@@ -5,6 +5,7 @@ import React from "react";
 import { useEffect, useState, useCallback, useContext } from "react";
 import style from "./editPinModal.module.css";
 import { api, type RouterOutputs } from "~/utils/api";
+import router from "next/router";
 interface ModalProps {
   id: string | undefined;
   name: string | undefined;
@@ -36,8 +37,10 @@ export default function Modal({
   });
 
   const editPin = api.pin.edit.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       window.location.reload();
+      await router.push(`/home`);
+      await router.push(`/pinDetails/${id}`);
     },
   });
 
