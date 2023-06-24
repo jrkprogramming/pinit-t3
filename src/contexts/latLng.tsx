@@ -1,9 +1,21 @@
-import { createContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useState,
+  type ReactNode,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
+
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
 
 interface LatLngValue {
-  data: { lat: number; lng: number };
-  setData: (value: { lat: number; lng: number }) => void;
+  data: Coordinates;
+  setData: Dispatch<SetStateAction<Coordinates>>;
 }
+
 const LatLngContext = createContext<LatLngValue | undefined>(undefined);
 
 interface LatLngProviderProps {
@@ -11,17 +23,10 @@ interface LatLngProviderProps {
 }
 
 export function LatLngProvider({ children }: LatLngProviderProps) {
-  const [data, setData] = useState({
+  const [data, setData] = useState<Coordinates>({
     lat: 0,
     lng: 0,
   });
-
-  const setClickedLatLng = (value: { lat: number; lng: number }) => {
-    // Implement the logic for setting the clicked LatLng
-    // For example:
-    // setData(value);
-    // Perform any other necessary actions
-  };
 
   return (
     <LatLngContext.Provider value={{ data, setData }}>

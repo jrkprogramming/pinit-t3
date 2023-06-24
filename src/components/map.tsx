@@ -14,6 +14,15 @@ import style from "./map";
 import LatLngContext from "../contexts/latLng";
 import { api, type RouterOutputs } from "~/utils/api";
 
+type PinInfo = {
+  _id: string;
+  name: string;
+  address: string;
+  city: string;
+  lat: null | number;
+  lng: null | number;
+};
+
 interface Coordinates {
   lat: number;
   lng: number;
@@ -54,15 +63,7 @@ const Map = (
   });
 
   // const [allPins, setAllPins] = useState([{}]);
-
-  const [pinInfo, setPinInfo] = useState({
-    _id: "",
-    name: "",
-    address: "",
-    city: "",
-    lat: null,
-    lng: null,
-  });
+  const [pinInfo, setPinInfo] = useState<Partial<PinInfo>>({});
 
   // prisma findAll
   // const searchedPins = allPins?.filter(function (el) {
@@ -106,6 +107,8 @@ const Map = (
   //   latLng.lat !== null && latLng.lng !== null
   //     ? { lat: parseFloat(latLng.lat), lng: parseFloat(latLng.lng) }
   //     : undefined;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { setData } = useContext(LatLngContext);
   const [clickedLatLng, setClickedLatLng] = useState<Coordinates | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -244,7 +247,7 @@ const Map = (
                   lat: e.latLng.lat(),
                   lng: e.latLng.lng(),
                 });
-                // setPinInfo(location);
+                setPinInfo(location);
               }
             }}
           ></Marker>
@@ -254,13 +257,13 @@ const Map = (
       {latLng.lat && (
         <InfoWindow
           position={{
-            lat: parseFloat(latLng.lat),
-            lng: parseFloat(latLng.lng),
+            lat: parseFloat(latLng.lat.toString()),
+            lng: parseFloat(latLng.lng.toString()),
           }}
           onCloseClick={() => {
             setLatLng({
-              lat: "",
-              lng: "",
+              lat: 0,
+              lng: 0,
             });
           }}
         >
@@ -268,9 +271,9 @@ const Map = (
             <div>
               <div>{pinInfo.name}</div>
               <div>{pinInfo.address}</div>
-              {/* <div>Created By: {pinInfo.Owner?.username}</div> */}
+              {/* <div>Created By: {pinInfo.}</div> */}
               <br></br>
-              <Link href={`/pins/${pinInfo._id}`}>View More</Link>
+              {/* <Link href={`/pins/${pinInfo._id}`}>View More</Link> */}
             </div>
           ) : (
             <div className="placement">
