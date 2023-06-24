@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
