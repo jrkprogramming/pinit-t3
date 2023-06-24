@@ -18,7 +18,7 @@ export const Navbar = () => {
           </Link>
           <li className={style.navItem}>
             <div>
-              <span className={style.welcome} onClick={() => void signOut()}>
+              <span className={style.welcome}>
                 {sessionData?.user?.name ? (
                   `WELCOME, ${sessionData.user.name}`
                 ) : (
@@ -44,20 +44,23 @@ export const Navbar = () => {
                   </Link>
                 </div>
               </li> */}
-              <li className={style.navItem}>
+              {/* <li className={style.navItem}>
                 <div>
                   <Link href="/home" className={style.link}>
                     ALL PINS
                   </Link>
                 </div>
+              </li> */}
+              <li className={style.navItem}>
+                <Link href="/createPin" className={style.link}>
+                  CREATE PIN
+                </Link>
               </li>
+              <button className={style.link} onClick={() => void signOut()}>
+                SIGN OUT
+              </button>
             </>
           )}
-          <li className={style.navItem}>
-            <Link href="/createPin" className={style.link}>
-              CREATE PIN
-            </Link>
-          </li>
         </ul>
       </div>
     </nav>

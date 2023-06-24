@@ -1,14 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useState, useEffect, useContext } from "react";
-import styled from "styled-components";
-import {
-  useLoadScript,
-  Marker,
-  InfoWindow,
-  GoogleMap,
-  InfoBox,
-  LoadScript,
-} from "@react-google-maps/api";
+import { Marker, InfoWindow, GoogleMap } from "@react-google-maps/api";
 import Link from "next/link";
 import style from "./map";
 import LatLngContext from "../contexts/latLng";
@@ -38,20 +30,7 @@ const center = {
   lng: -100,
 };
 
-const Map = (
-  {
-    // all of this needs to be called in the component via prisma/trpc
-    // latLng,
-    // setLatLng,
-    // infoLatLng,
-    // setInfoLatLng,
-    // setAllPins,
-    // allPins,
-    // pinInfo,
-    // setPinInfo,
-    // searchBar,
-  }
-) => {
+const Map = () => {
   const [latLng, setLatLng] = useState<Coordinates>({
     lat: 0,
     lng: 0,
@@ -62,19 +41,7 @@ const Map = (
     lng: 0,
   });
 
-  // const [allPins, setAllPins] = useState([{}]);
   const [pinInfo, setPinInfo] = useState<Partial<PinInfo>>({});
-
-  // prisma findAll
-  // const searchedPins = allPins?.filter(function (el) {
-  //   return (
-  //     el?.name?.includes(searchBar) ||
-  //     el?.address?.includes(searchBar) ||
-  //     el?.city?.includes(searchBar) ||
-  //     el?.description?.includes(searchBar) ||
-  //     el?.Owner?.username.includes(searchBar)
-  //   );
-  // });
 
   // const [userCenter, setUserCenter] = useState<{
   //   lat: number | null;

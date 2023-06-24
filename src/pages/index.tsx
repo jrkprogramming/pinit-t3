@@ -41,24 +41,6 @@ export default function Home() {
               GO TO MAP
             </Link>
           )}
-          {/* <button className="btn1">
-            <a href="/login" onClick={setGeoLoc()}>
-              LOGIN
-            </a>
-          </button> */}
-
-          {/* <a href="/login" onClick={setGeoLoc()}>
-              <button className="btn1">LOGIN</button>
-            </a> */}
-
-          {/* <button className="btn2">
-            <a href="/signup" onClick={setGeoLoc()}>
-              SIGN-UP
-            </a>
-          </button> */}
-          {/* <a href="/signup" onClick={setGeoLoc()}>
-              <button className="btn2">SIGN-UP</button>
-            </a> */}
         </div>
       </div>
     </div>

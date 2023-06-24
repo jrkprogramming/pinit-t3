@@ -7,7 +7,7 @@ import {
 
 export const pinRouter = createTRPCRouter({
 
-	getAll: publicProcedure.query(({ ctx }) => {
+	getAll: protectedProcedure.query(({ ctx }) => {
 		return ctx.prisma.pin.findMany();
 	}),
 
