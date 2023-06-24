@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
 
-* {
+.bodyContainer {
   padding: 0;
   margin: 0;
   box-sizing: content-box;
+  overflow: hidden;
 }
 
-section {
+.sectionContainer {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -55,10 +56,10 @@ section {
   object-fit: contain;
 }
 
-img {
+/* img {
   height: 100%;
   width: 100%;
-}
+} */
 
 .left h1 {
   font-size: 2rem;

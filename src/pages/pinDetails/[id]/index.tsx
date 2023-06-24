@@ -6,10 +6,11 @@ export default function PinDetailsPage() {
   const router = useRouter();
   const { name, address, city, description, lat, lng } = router.query;
   return (
-    <div>
-      <div className="container">
-        <div className="left">
-          <div className="infoContainer">
+    <div className={style.bodyContainer}>
+      <section className={style.sectionContainer}>
+        {/* <div className={style.container}> */}
+        <div className={style.left}>
+          <div className={style.infoContainer}>
             <h2>
               {/* <FaCity className="icon" /> */}
               <br></br> {city}city
@@ -31,7 +32,7 @@ export default function PinDetailsPage() {
           </div>
         </div>
 
-        <div className="right">
+        <div className={style.right}>
           <h1>{name}name</h1>
           <p>{description}descrip</p>
           {/* <p>Pin Created By: {pinInfo.Owner?.username}</p>
@@ -46,7 +47,8 @@ export default function PinDetailsPage() {
             ) : null}
           </div> */}
         </div>
-      </div>
+        {/* </div> */}
+      </section>
     </div>
   );
 }
