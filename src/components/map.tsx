@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useState, useEffect, useContext } from "react";
@@ -15,7 +16,7 @@ type PinInfo = {
   description: string;
   lat: null | number;
   lng: null | number;
-  user: any;
+  userName: string;
 };
 
 interface Coordinates {
@@ -219,6 +220,7 @@ const Map = () => {
                   lng: e.latLng.lng(),
                 });
                 setPinInfo(location);
+                console.log(pinInfo);
               }
             }}
           ></Marker>
@@ -243,7 +245,7 @@ const Map = () => {
             <div>
               <div>{pinInfo.name}</div>
               <div>{pinInfo.address}</div>
-              <div>Created By: {pinInfo.user}</div>
+              <div>Created By: {pinInfo.userName}</div>
               <br></br>
               <Link
                 href={{
@@ -256,6 +258,7 @@ const Map = () => {
                     lat: pinInfo.lat,
                     lng: pinInfo.lng,
                     description: pinInfo.description,
+                    userName: pinInfo.userName,
                   },
                 }}
               >

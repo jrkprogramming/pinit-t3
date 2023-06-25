@@ -78,6 +78,7 @@ model Pin {
     lng         Float
     lat         Float
     description String
+    userName    String
     // image       String
     // image_id    String
     comments    Comment[]

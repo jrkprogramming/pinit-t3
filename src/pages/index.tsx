@@ -38,7 +38,7 @@ export default function Home() {
           )}
           {sessionData?.user && (
             <Link className={style.btn1} href={"/home"}>
-              GO TO MAP
+              GO TO YOUR MAP
             </Link>
           )}
         </div>
