@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -23,6 +24,9 @@ interface Coordinates {
   lat: number;
   lng: number;
 }
+interface MapProps {
+  searchBar: string;
+}
 
 const mapContainerStyle = {
   width: "100vw",
@@ -34,7 +38,7 @@ const center = {
   lng: -100,
 };
 
-const Map = () => {
+const Map = ({ searchBar }: MapProps) => {
   const [latLng, setLatLng] = useState<Coordinates>({
     lat: 0,
     lng: 0,
@@ -78,6 +82,7 @@ const Map = () => {
   //   latLng.lat !== null && latLng.lng !== null
   //     ? { lat: parseFloat(latLng.lat), lng: parseFloat(latLng.lng) }
   //     : undefined;
+
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const { setData } = useContext(LatLngContext);
@@ -96,6 +101,16 @@ const Map = () => {
       },
     }
   );
+
+  const searchedPins = pins?.filter(function (el) {
+    return (
+      el?.name.includes(searchBar) ||
+      el?.address.includes(searchBar) ||
+      el?.city.includes(searchBar) ||
+      el?.description.includes(searchBar) ||
+      el?.userName.includes(searchBar)
+    );
+  });
 
   return (
     // <LoadScript
@@ -201,7 +216,7 @@ const Map = () => {
         ],
       }}
     >
-      {pins?.map((location, i) => {
+      {searchedPins?.map((location, i) => {
         return (
           <Marker
             key={i}
@@ -271,7 +286,7 @@ const Map = () => {
               </Link> */}
             </div>
           ) : (
-            <div className="placement">
+            <div className="list-none text-red-500 no-underline">
               <div>
                 <Link href={"/createPin"}>ADD A PIN</Link>
               </div>

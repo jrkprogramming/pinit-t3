@@ -28,7 +28,9 @@ export default function Home() {
         <p>
           Discover hidden gems, wherever you are. This App is the perfect way to
           explore different cities in a new way using maps to mark and upload
-          your favorite &quot;off the grid&quot; places to share with others!{" "}
+          your favorite &quot;off the grid&quot; places to share with others!
+          Just click anywhere on the map to add a pin or search for any location
+          with the Google Places API!{" "}
         </p>
         <div className={style.buttons}>
           {!sessionData?.user && (
