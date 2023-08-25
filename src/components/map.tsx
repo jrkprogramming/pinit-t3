@@ -85,8 +85,10 @@ const Map = ({ searchBar }: MapProps) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
+
   const { setData } = useContext(LatLngContext);
   const [clickedLatLng, setClickedLatLng] = useState<Coordinates | null>(null);
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   // const { data: sessionData } = useSession();
   const { data: pins } = api.pin.getAllPins.useQuery(
@@ -113,9 +115,6 @@ const Map = ({ searchBar }: MapProps) => {
   });
 
   return (
-    // <LoadScript
-    //   googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
-    // >
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={4}
@@ -295,7 +294,6 @@ const Map = ({ searchBar }: MapProps) => {
         </InfoWindow>
       )}
     </GoogleMap>
-    // </LoadScript>
   );
 };
 

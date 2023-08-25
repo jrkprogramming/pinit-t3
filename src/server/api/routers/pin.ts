@@ -12,7 +12,7 @@ import {
 export const pinRouter = createTRPCRouter({
 
 
-	getAllPins: protectedProcedure.query(({ ctx }) => {
+	getAllPins: publicProcedure.query(({ ctx }) => {
 		return ctx.prisma.pin.findMany();
 	}),
 

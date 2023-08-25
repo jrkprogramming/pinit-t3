@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect,  } from "react";
 import style from "./[id].module.css";
 import { useRouter } from "next/router";
 import { api, type RouterOutputs } from "~/utils/api";
 import Modal from "../../../components/editPinModal";
+import { useSession } from "next-auth/react";
 
 export default function PinDetailsPage() {
+  const { data: sessionData } = useSession();
   const router = useRouter();
-  const { id, name, address, city, description, lat, lng } = router.query;
+  const { id, name, address, city, description, lat, lng, userName } = router.query;
 
   function handleDeletePin(id: string | string[] | undefined) {
     if (typeof id === "string") {
@@ -72,26 +74,27 @@ export default function PinDetailsPage() {
           <p>{description}</p>
           {/* <p>Pin Created By: {pinInfo.Owner?.username}</p> */}
           <div className={style.BtnContainer}>
-            {/* {user && pinInfo?.user === user._id ? ( */}
-            <div id="btn">
-              {/* <Link href={`/pins/edit/${id}`}>Edit Pin</Link> */}
-              <Modal
-                id={idValue}
-                name={nameValue}
-                address={addressValue}
-                city={cityValue}
-                description={descriptionValue}
-                lat={latNumber}
-                lng={lngNumber}
-              ></Modal>
-              <button className={style.btn} onClick={() => handleDeletePin(id)}>
-                DELETE
-              </button>
-            </div>
-            {/* ) : null} */}
+            {sessionData?.user.name === userName ? (
+              <div id="btn">
+                <Modal
+                  id={idValue}
+                  name={nameValue}
+                  address={addressValue}
+                  city={cityValue}
+                  description={descriptionValue}
+                  lat={latNumber}
+                  lng={lngNumber}
+                ></Modal>
+                <button
+                  className={style.btn}
+                  onClick={() => handleDeletePin(id)}
+                >
+                  DELETE
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
-        {/* </div> */}
       </section>
     </div>
   );
