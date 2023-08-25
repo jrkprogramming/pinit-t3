@@ -23,7 +23,6 @@ export const Navbar = () => {
             className={style.navbarLogo}
           >
             PINIT
-            {/* <FaMapPin className="pinIcon" /> */}
           </Link>
           <li className={style.navItem}>
             <div>
@@ -46,20 +45,6 @@ export const Navbar = () => {
 
           {sessionData?.user?.name && (
             <>
-              {/* <li className={style.navItem}>
-                <div>
-                  <Link href="/" className={style.link}>
-                    MY PINS
-                  </Link>
-                </div>
-              </li> */}
-              {/* <li className={style.navItem}>
-                <div>
-                  <Link href="/home" className={style.link}>
-                    ALL PINS
-                  </Link>
-                </div>
-              </li> */}
               <li className={style.navItem}>
                 <Link href="/createPin" className={style.link}>
                   CREATE PIN

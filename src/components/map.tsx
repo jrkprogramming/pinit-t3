@@ -89,15 +89,13 @@ const Map = ({ searchBar }: MapProps) => {
   const { setData } = useContext(LatLngContext);
   const [clickedLatLng, setClickedLatLng] = useState<Coordinates | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  // const { data: sessionData } = useSession();
   const { data: pins } = api.pin.getAllPins.useQuery(
     undefined, // no input
     {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      // enabled: sessionData?.user !== undefined,
+
+
       onSuccess: () => {
-        // setSelectedRecipe(selectedRecipe ?? data[0] ?? null);
+
         console.log("recipes rendered!");
         console.log(pins);
       },
