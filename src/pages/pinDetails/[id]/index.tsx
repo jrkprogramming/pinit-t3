@@ -91,6 +91,7 @@ export default function PinDetailsPage() {
                 >
                   DELETE
                 </button>
+                {/* TODO: Add a button that will link to the Pin owner's profile */}
               </div>
             ) : null}
           </div>

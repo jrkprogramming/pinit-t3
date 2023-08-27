@@ -50,6 +50,12 @@ export const Navbar = () => {
                   CREATE PIN
                 </Link>
               </li>
+              <li className={style.navItem}>
+                {/* TODO: This button should route to the logged in user profile */}
+                <Link href="" className={style.link}>
+                  PROFILE
+                </Link>
+              </li>
               <button className={style.link} onClick={handleSignOut}>
                 SIGN OUT
               </button>
